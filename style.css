@@ -1,0 +1,448 @@
+/* Hydra Fit Styling */
+
+:root {
+    --bg-color: #f4f8f7;
+    --card-color: #ffffff;
+    --text-color: #1f2933;
+    --muted-color: #6b7280;
+    --primary-color: #2a9d8f;
+    --secondary-color: #264653;
+    --border-color: #aebfc4;
+    --button-text-color: #ffffff;
+    --input-bg-color: #ffffff;
+    --input-text-color: #1f2933;
+    --reset-color: #075b68;
+    
+}
+
+/* Dark Mode */
+body.dark-mode {
+    --bg-color: #121a1d;
+    --card-color: #1d292d;
+    --text-color: #f4f7f6;
+    --muted-color: #aab8b5;
+    --primary-color: #4ecdc4;
+    --secondary-color: #8ed1c7;
+    --border-color: #344449;
+    --input-bg-color: #f4f7f6;
+    --input-text-color: #121a1d;
+    --button-text-color: #121a1d;
+}
+
+/* Reset */
+ * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Body */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Header */
+
+.header {
+    max-width: 1100px;
+    margin: 0 auto 30px;
+    padding: 25px;
+    background-color: var(--card-color);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    text-align: center;
+}
+
+.header h1 {
+    font-size: 2.2rem;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+}
+
+.header p {
+    color: var(--muted-color);
+    margin-bottom: 18px;
+}
+
+/* Theme Button */
+
+#theme-toggle {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--secondary-color);
+    color: var(--button-text-color);
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+#theme-toggle:hover {
+    opacity: 0.9;
+}
+
+/* Cards */
+
+.card {
+   background-color: var(--card-color);
+   border: 1px solid var(--border-color);
+   border-radius: 16px;
+   padding: 26px;
+   box-shadow: 0 4px 12px rgba (0, 0, 0, 0.08);
+   transition: backgroung-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Light Mode Card Borders */
+body:not(.dark-mode) .card {
+    border: 2px solid var(--border-color);
+}
+
+.card-header {
+   margin-bottom: 20px;
+}
+
+.card-header h2 {
+   color: var(--primary-color);
+   margin-bottom: 6px;
+}
+
+.card-header p {
+color: var(--muted-color);
+}
+
+/* Main Dashboard Layout */
+
+main {
+max-width: 1100px;
+margin: 0 auto;
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 24px;
+}
+
+/* Responsive Layout */
+@media (max-width: 900px) {
+   main{
+    grid-template-columns: 1fr;
+   } 
+}
+
+/* Hydration */
+
+.hydration-card {
+    min-height: 250px;
+}
+
+.hydration-info {
+    margin-bottom: 18px;
+}
+
+.hydration-info p {
+margin: 8px 0;
+}
+
+.progress-container {
+    width: 100%;
+    height: 12px;
+    background-color: var(--border-color);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}
+
+.goal-badge {
+    margin-top: 12px;
+}
+
+.water-stats {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Hydration Buttons */
+
+.hydration-card button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--secondary-color);
+    color: var(--button-text-color);
+    cursor: pointer;
+    margin-right: 6px;
+}
+
+.hydration-card button:hover {
+    opacity: 0.9;
+}
+
+/* Habits */
+
+.habits-card {
+    min-height: 250px;
+}
+
+.habit-form {
+    margin-bottom: 18px;
+}
+
+.habit-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.habit-input-row {
+    display: flex;
+    gap: 10px;
+}
+
+.habit-input-row input {
+    flex: 1;
+    padding: 10px 12px;
+    border-radius: 8px;
+    color: var(--text-color);
+    font-size: 0.95rem;
+    
+}
+
+.habit-input-row input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.habit-input-row button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--secondary-color);
+    color: var(--button-text-color);
+    cursor: pointer;
+}
+
+.habit-input-row button:hover {
+    opacity: 0.9;
+}
+
+.habit-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.habit-warning {
+    color: var(--muted-color);
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+.habit-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    flex-wrap: wrap;
+}
+
+.habit-row span {
+    flex: 1;
+    font-weight: 600;
+}
+
+.habit-row button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--secondary-color);
+    color: var(--button-text-color);
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.habit-row button:hover {
+    opacity: 0.9;
+}
+
+.habit-row button:last-child {
+    background-color: var(--muted-color);
+}
+
+/* Calories */
+
+.calories-card {
+    min-height: 250px;
+}
+
+.calorie-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-weight: bold;
+}
+
+.form-group select,
+.form-group input {
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-color: var(--input--bg-color);
+    color: var(--input-text-color);
+    font-size: 0.95rem;
+}
+
+.form-group select:focus,
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+#calculate-calories {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--secondary-color);
+    color: var(--button-text-color);
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+#calculate-calories:hover {
+    opacity: 0.9;
+}
+
+.calorie-total {
+    margin-top: 20px;
+    padding: 14px;
+    text-align: center;
+    border-radius: 8px;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+}
+
+.calorie-total p {
+    color: var(--muted-color);
+    margin-bottom: 6px;
+}
+
+.calorie-total strong {
+    font-size: 1.4rem;
+    color: var(--primary-color);
+}
+
+#reset-calories {
+  width: 100%;
+  padding: 14px;
+  margin-top: 12px;
+  border: none;
+  border-radius: 12px;
+  background-color: var(--reset-color);
+  color: var(--button-text-color);
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Mobile Responsive */
+
+@media (max-width: 600px) {
+    body {
+        padding: 12px;
+    }
+
+    .header {
+        padding: 20px 15px;
+        margin-bottom: 20px;
+    }
+
+    .header h1 {
+        font-size: 1.8rem;
+    }
+
+    .header p {
+        font-size: 0.9rem;
+    }
+
+    main {
+        gap: 16px;
+    }
+
+    .card {
+        padding: 18px;
+    }
+
+    .habit-input-row {
+        flex-direction: column;
+    }
+
+    .habit-input-row button {
+        width: 100%;
+    }
+
+    #calculate-calories {
+        width: 100%;
+    }
+
+    .hydration-card button {
+        width: 100%;
+        margin-bottom: 8px;
+    }
+}
+
+.water-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+body.dark-mode input,
+body.dark-mode select {
+    color: var(--input-text);
+    background-colour: var(--input-bg);
+}
+
+body.dark-mode select option {
+    colour: var(--input-text);
+    background-colour: var(--input-bg);
+}
+
+/* Dark Mode - Button and Activity Text */
+
+body.dark-mode button {
+    color: var(--button-text-color)!important;
+}
+
+body.dark-mode input,
+body.dark-mode select {
+    color: var(--input-text-color);
+    background-color: var(--input-bg-color);
+}
+
+body.dark-mode select option {
+    color: var(--input-text-color);
+    background-color: var(--input-bg-color);
+}
+
+body.dark-mode select {
+    color-scheme: light;
+}

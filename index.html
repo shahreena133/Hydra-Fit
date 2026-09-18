@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Hydra Fit </title>
+    
+    <link rel="stylesheet" href="./style.css">
+
+
+</head>
+<body>
+    <header class="header">
+<div>
+<h1> Hydra Fit </h1>
+<p> Track Your Health. Live Your Best </p>
+</div>
+
+<!------ Dark Mode--------> 
+
+<button id="theme-toggle"  type="button">
+    Dark Mode 🌙 
+
+</button>
+
+</header>
+
+<main>
+
+<!-- Hydration Section -->
+
+ <section class="card hydration-card" aria-labelledby="hydration-title">
+
+    <header class="card-header">
+
+ <h2 id="hydration-title">💧 Hydration</h2
+
+      <p>Track your daily water intake.</p>
+
+     </header>
+
+  <div class="hydration-info">
+  <div class="water-stats">
+
+      <p>
+     <strong id="water-amount">0</strong>
+          /
+   <span id="water-goal">2500</span>
+        mL
+  </p>
+
+     <p id="water-percentage">0%</p>
+
+      </div>
+ </div>
+     <div class="progress-container">
+
+      <div
+
+      id="water-progress"
+
+      class="progress-bar"
+
+     role="progressbar"
+
+     aria-valuemin="0"
+
+     aria-valuemax="100"
+
+     aria-valuenow="0"
+
+     ></div>
+
+     </div>
+
+ <p id="goal-achieved" class="goal-badge" hidden>
+
+      Goal Achieved!🎉
+
+     </p>
+
+   <div class="water-actions">
+
+   <button id="add-cup" type="button">
+
+         + 250ml (Cup)
+
+    </button>
+
+  <button id="add-bottle" type="button">
+
+      + 500ml (Bottle)
+
+      </button>
+
+   <button id="reset-water" type="button">
+
+       Reset
+
+  </button>
+
+       </div>
+
+        </section>
+
+    <!-- Habit Section -->
+
+      <section class="card habits-card" aria-labelledby="habits-title">
+
+      <header class="card-header">
+        <h2 id="habits-title">🔥 Habit Streaks</h2>
+
+         <p>Build and track your daily habits.</p>
+
+       </header>
+
+   <div class="habit-form">
+
+      <label for="habit-input">Add a new habit</label>
+
+ <div class="habit-input-row">
+
+       <input
+
+ type="text"
+ id="habit-input"
+ placeholder="Enter a habit"
+ maxlength="50"
+         >
+
+<button id="add-habit" type="button">
+
+       Add Habit
+
+       </button>
+
+       </div>
+
+    <p id="habit-warning" 
+    class="validation-warning" hidden>
+
+   You can have a maximum of 4 active habits.
+
+       </p>
+
+      </div>
+
+      <div
+
+    id="habit-list"
+    class="habit-list"
+    aria-live="polite"
+            >
+
+      </div>
+
+     </section>
+
+ <!-- Calories Section -->
+
+  <section class="card calories-card" aria-labelledby="calories-title">
+
+    <header class="card-header">
+
+ <h2 id="calories-title">🏃 Active Calories</h2>
+
+  <p>Calculate calories burned through activity.</p>
+
+ </header>
+
+ <div class="calorie-form">
+
+ <div class="form-group">
+
+    <label for="activity-select">
+
+     Activity
+
+      </label>
+
+         <select id="activity-select">
+ <option value="running" data-rate="11">
+  Running — 11 kcal/min
+
+  </option>
+
+<option value="cycling" data-rate="8">
+ Cycling — 8 kcal/min
+
+ </option>
+
+ <option value="yoga" data-rate="4">
+  Yoga — 4 kcal/min
+
+  </option>
+
+    </select>
+
+  </div>
+
+    <div class="form-group">
+    <label for="duration-input">Duration (minutes)</label>
+    <input
+        type="number"
+        id="duration-input"
+        placeholder="Enter minutes"
+    >
+</div>
+
+<button id="calculate-calories">Calculate & Add</button>
+
+<button id="reset-calories">Reset Calories</button>  
+
+</div>
+
+ <div class="calorie-total">
+
+   <p>Today's Total</p>
+
+     <strong>
+
+       <span id="calorie-amount">0</span>
+
+         kcal
+
+      </strong>
+   </div>
+
+ </section>
+
+    </main>
+
+    <script src="script.js"></script>
+
+
+</body>
+</html>
