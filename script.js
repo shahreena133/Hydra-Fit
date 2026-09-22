@@ -1,41 +1,114 @@
-//  Dark / Light Mode 
+// Dark / Light Mode
 
 const themeToggle = document.getElementById("theme-toggle");
 
-themeToggle.addEventListener("click", function () {
-    document.body.classList.toggle("dark-mode");
-
-    if (document.body.classList.contains("dark-mode")) {
-        themeToggle.textContent = "Light Mode ☀️";
+function updateThemeButton() {
+    if (document.documentElement.classList.contains("dark-mode")) {
+        themeToggle.textContent = "Light Mode \u{2600}\u{FE0F}";
     } else {
-        themeToggle.textContent = "Dark Mode 🌙";
+        themeToggle.textContent = "Dark Mode \u{1F319}";
     }
+}
+
+// Load saved theme
+const savedTheme = localStorage.getItem("theme");
+
+if (savedTheme === "dark") {
+    document.documentElement.classList.add("dark-mode");
+}
+
+updateThemeButton();
+
+themeToggle.addEventListener("click", function () {
+    document.documentElement.classList.toggle("dark-mode");
+
+
+    if (document.documentElement.classList.contains("dark-mode")) {
+        localStorage.setItem("theme", "dark");
+    } else {
+        localStorage.setItem("theme", "light");
+    }
+
+    updateThemeButton();
 });
+
+
+// Get today's date using local time
+
+function getToday() {
+    const date = new Date();
+
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+}
+
+const today = getToday();
 
 
 // Hydration Tracker
 
 const waterGoal = 2500;
 
-let waterAmount = Number(localStorage.getItem("waterAmount")) || 0;
+const waterAmountDisplay =
+    document.getElementById("water-amount");
 
-const waterAmountDisplay = document.getElementById("water-amount");
-const waterPercentageDisplay = document.getElementById("water-percentage");
-const waterProgress = document.getElementById("water-progress");
-const goalAchieved = document.getElementById("goal-achieved");
+const waterPercentageDisplay =
+    document.getElementById("water-percentage");
 
-const addCupButton = document.getElementById("add-cup");
-const addBottleButton = document.getElementById("add-bottle");
-const resetWaterButton = document.getElementById("reset-water");
+const waterProgress =
+    document.getElementById("water-progress");
+
+const goalAchieved =
+    document.getElementById("goal-achieved");
+
+const addCupButton =
+    document.getElementById("add-cup");
+
+const addBottleButton =
+    document.getElementById("add-bottle");
+
+const resetWaterButton =
+    document.getElementById("reset-water");
+
+
+// Check whether saved water belongs to today
+
+const savedWaterDate =
+    localStorage.getItem("waterDate");
+
+let waterAmount;
+
+if (savedWaterDate === today) {
+    waterAmount =
+        Number(localStorage.getItem("waterAmount")) || 0;
+} else {
+    waterAmount = 0;
+
+    localStorage.setItem("waterDate", today);
+    localStorage.setItem("waterAmount", "0");
+}
+
 
 function updateWater() {
-    const percentage = Math.min((waterAmount / waterGoal) * 100, 100);
+    const percentage =
+        Math.min((waterAmount / waterGoal) * 100, 100);
 
-    waterAmountDisplay.textContent = waterAmount;
-    waterPercentageDisplay.textContent = Math.round(percentage) + "%";
+    waterAmountDisplay.textContent =
+        waterAmount;
 
-    waterProgress.style.width = percentage + "%";
-    waterProgress.setAttribute("aria-valuenow", Math.round(percentage));
+    waterPercentageDisplay.textContent =
+        Math.round(percentage) + "%";
+
+    waterProgress.style.width =
+        percentage + "%";
+
+    waterProgress.setAttribute(
+        "aria-valuenow",
+        Math.round(percentage)
+    );
 
     if (waterAmount >= waterGoal) {
         goalAchieved.hidden = false;
@@ -45,18 +118,29 @@ function updateWater() {
         waterProgress.style.backgroundColor = "";
     }
 
-    localStorage.setItem("waterAmount", waterAmount);
+    localStorage.setItem(
+        "waterAmount",
+        waterAmount
+    );
+
+    localStorage.setItem(
+        "waterDate",
+        today
+    );
 }
+
 
 addCupButton.addEventListener("click", function () {
     waterAmount += 250;
     updateWater();
 });
 
+
 addBottleButton.addEventListener("click", function () {
     waterAmount += 500;
     updateWater();
 });
+
 
 resetWaterButton.addEventListener("click", function () {
     waterAmount = 0;
@@ -64,81 +148,144 @@ resetWaterButton.addEventListener("click", function () {
 });
 
 
-// Habit Tracker 
+// Habit Tracker
 
-const habitInput = document.getElementById("habit-input");
-const addHabitButton = document.getElementById("add-habit");
-const habitList = document.getElementById("habit-list");
-const habitWarning = document.getElementById("habit-warning");
+const habitInput =
+    document.getElementById("habit-input");
 
-let habits = JSON.parse(localStorage.getItem("habits")) || [];
+const addHabitButton =
+    document.getElementById("add-habit");
+
+const habitList =
+    document.getElementById("habit-list");
+
+const habitWarning =
+    document.getElementById("habit-warning");
+
+
+let habits =
+    JSON.parse(localStorage.getItem("habits")) || [];
+
 
 function saveHabits() {
-    localStorage.setItem("habits", JSON.stringify(habits));
+    localStorage.setItem(
+        "habits",
+        JSON.stringify(habits)
+    );
 }
+
 
 function renderHabits() {
     habitList.innerHTML = "";
 
     habits.forEach(function (habit, index) {
 
-        const habitRow = document.createElement("div");
+        const habitRow =
+            document.createElement("div");
+
         habitRow.className = "habit-row";
 
-        const habitText = document.createElement("span");
-        habitText.textContent =
-            "🔥 " + habit.name + " — Streak: " + habit.streak;
 
-        const logButton = document.createElement("button");
+        const habitText =
+            document.createElement("span");
+
+        habitText.textContent =
+            "\u{1F525} " +
+            habit.name +
+            " - Streak: " +
+            habit.streak;
+
+
+        const logButton =
+            document.createElement("button");
+
         logButton.textContent = "Log Today";
         logButton.type = "button";
 
+
+        // Allow only one log per habit per day
+
+        if (habit.lastLoggedDate === today) {
+            logButton.disabled = true;
+            logButton.textContent = "Logged Today";
+        }
+
+
         logButton.addEventListener("click", function () {
+
+            if (habits[index].lastLoggedDate === today) {
+                return;
+            }
+
             habits[index].streak += 1;
 
+            habits[index].lastLoggedDate = today;
+
             saveHabits();
+
             renderHabits();
         });
 
-        const deleteButton = document.createElement("button");
+
+        const deleteButton =
+            document.createElement("button");
+
         deleteButton.textContent = "Delete";
         deleteButton.type = "button";
 
+
         deleteButton.addEventListener("click", function () {
+
             habits.splice(index, 1);
+
             habitWarning.hidden = true;
             addHabitButton.disabled = false;
 
             saveHabits();
+
             renderHabits();
         });
-    
+
+
         habitRow.appendChild(habitText);
         habitRow.appendChild(logButton);
         habitRow.appendChild(deleteButton);
 
         habitList.appendChild(habitRow);
     });
+
+
+    if (habits.length < 4) {
+        addHabitButton.disabled = false;
+        habitWarning.hidden = true;
+    }
 }
+
 
 addHabitButton.addEventListener("click", function () {
 
-    const habitName = habitInput.value.trim();
+    const habitName =
+        habitInput.value.trim();
+
 
     if (habitName === "") {
         return;
     }
 
+
     if (habits.length >= 4) {
         habitWarning.hidden = false;
-        addHabitButton.disabled = true
+        addHabitButton.disabled = true;
         return;
     }
 
+
     habits.push({
         name: habitName,
-        streak: 0
+        streak: 0,
+        lastLoggedDate: null
     });
+
 
     saveHabits();
 
@@ -147,56 +294,105 @@ addHabitButton.addEventListener("click", function () {
     renderHabits();
 });
 
+
 renderHabits();
 
 
-//  Active Calories 
+// Active Calories
 
-const activitySelect = document.getElementById("activity-select");
-const durationInput = document.getElementById("duration-input");
+const activitySelect =
+    document.getElementById("activity-select");
+
+const durationInput =
+    document.getElementById("duration-input");
+
 const calculateCaloriesButton =
     document.getElementById("calculate-calories");
-const calorieAmount = document.getElementById("calorie-amount");
-const resetCaloriesButton = document.getElementById("reset-calories")
 
-let calorieTotal =
-    Number(localStorage.getItem("calorieTotal")) || 0;
+const calorieAmount =
+    document.getElementById("calorie-amount");
+
+const resetCaloriesButton =
+    document.getElementById("reset-calories");
+
+
+// Check whether saved calories belong to today
+
+const savedCalorieDate =
+    localStorage.getItem("calorieDate");
+
+let calorieTotal;
+
+if (savedCalorieDate === today) {
+    calorieTotal =
+        Number(localStorage.getItem("calorieTotal")) || 0;
+} else {
+    calorieTotal = 0;
+
+    localStorage.setItem("calorieDate", today);
+    localStorage.setItem("calorieTotal", "0");
+}
+
 
 function updateCalories() {
-    calorieAmount.textContent = calorieTotal;
-    localStorage.setItem("calorieTotal", calorieTotal);
+
+    calorieAmount.textContent =
+        calorieTotal;
+
+    localStorage.setItem(
+        "calorieTotal",
+        calorieTotal
+    );
+
+    localStorage.setItem(
+        "calorieDate",
+        today
+    );
 }
+
 
 calculateCaloriesButton.addEventListener("click", function () {
 
-    const duration = Number(durationInput.value);
+    const duration =
+        Number(durationInput.value);
 
-    if (duration <= 0 || isNaN(duration)) {
+
+    if (duration <= 0 || Number.isNaN(duration)) {
         return;
     }
 
+
     const selectedOption =
-        activitySelect.options[activitySelect.selectedIndex];
+        activitySelect.options[
+            activitySelect.selectedIndex
+        ];
 
-    const rate = Number(selectedOption.dataset.rate);
 
-    const caloriesBurned = duration * rate;
+    const rate =
+        Number(selectedOption.dataset.rate);
+
+
+    const caloriesBurned =
+        duration * rate;
+
 
     calorieTotal += caloriesBurned;
 
     updateCalories();
-  durationInput.value = "";
+
+    durationInput.value = "";
 });
 
-resetCaloriesButton.addEventListener("click" , function (){
-calorieTotal = 0;
-updateCalories();
 
+resetCaloriesButton.addEventListener("click", function () {
+
+    calorieTotal = 0;
+
+    updateCalories();
 });
 
-updateCalories();
 
-
-// Load Saved Hydration
+// Load saved data
 
 updateWater();
+updateCalories();

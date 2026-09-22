@@ -9,13 +9,14 @@
     --secondary-color: #264653;
     --border-color: #aebfc4;
     --button-text-color: #ffffff;
-    --input-bg-color: #ffffff;
-    --input-text-color: #1f2933;
+    --input-bg-color: #f4f7f6;
+    --input-text-color: #121a1d;
     --reset-color: #075b68;
     
 }
 
 /* Dark Mode */
+html.dark-mode,
 body.dark-mode {
     --bg-color: #121a1d;
     --card-color: #1d292d;
@@ -24,8 +25,8 @@ body.dark-mode {
     --primary-color: #4ecdc4;
     --secondary-color: #8ed1c7;
     --border-color: #344449;
-    --input-bg-color: #f4f7f6;
-    --input-text-color: #121a1d;
+    --input-bg-color: #1d292d;
+    --input-text-color: #f4f7f6;
     --button-text-color: #121a1d;
 }
 
@@ -415,34 +416,34 @@ margin: 8px 0;
     gap: 10px;
 }
 
-body.dark-mode input,
-body.dark-mode select {
-    color: var(--input-text);
-    background-colour: var(--input-bg);
+html.dark-mode input,
+html.dark-mode select {
+    color: var(--input-text-color);
+    background-colour: var(--input-bg-color);
 }
 
-body.dark-mode select option {
-    colour: var(--input-text);
-    background-colour: var(--input-bg);
+html.dark-mode select option {
+    colour: var(--input-text-color);
+    background-colour: var(--input-bg-color);
 }
 
 /* Dark Mode - Button and Activity Text */
 
-body.dark-mode button {
+html.dark-mode button {
     color: var(--button-text-color)!important;
 }
 
-body.dark-mode input,
-body.dark-mode select {
-    color: var(--input-text-color);
-    background-color: var(--input-bg-color);
+html.dark-mode input,
+html.dark-mode select {
+    background-color: var(--input-bg-color) !important;
+    color: var(--input-text-color) !important;
+    caret-color: var(--input-text-color);
 }
 
-body.dark-mode select option {
-    color: var(--input-text-color);
-    background-color: var(--input-bg-color);
+html.dark-mode select {
+    color-scheme: dark;
 }
 
-body.dark-mode select {
+html:not(.dark-mode) select {
     color-scheme: light;
 }

@@ -5,12 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Hydra Fit </title>
     
-    <link rel="stylesheet" href="./style.css">
+<script>
+    if (localStorage.getItem("theme") === "dark") {
+        document.documentElement.classList.add("dark-mode");
+    }
+</script>
 
+    <link rel="stylesheet" href="./style.css">
 
 </head>
 <body>
-    <header class="header">
+
+<header class="header">
+
 <div>
 <h1> Hydra Fit </h1>
 <p> Track Your Health. Live Your Best </p>
@@ -19,7 +26,7 @@
 <!------ Dark Mode--------> 
 
 <button id="theme-toggle"  type="button">
-    Dark Mode 🌙 
+    Dark Mode 
 
 </button>
 
@@ -33,7 +40,7 @@
 
     <header class="card-header">
 
- <h2 id="hydration-title">💧 Hydration</h2
+ <h2 id="hydration-title">&#128167; Hydration</h2
 
       <p>Track your daily water intake.</p>
 
@@ -75,7 +82,7 @@
 
  <p id="goal-achieved" class="goal-badge" hidden>
 
-      Goal Achieved!🎉
+      Goal Achieved!&#127881;
 
      </p>
 
@@ -108,7 +115,7 @@
       <section class="card habits-card" aria-labelledby="habits-title">
 
       <header class="card-header">
-        <h2 id="habits-title">🔥 Habit Streaks</h2>
+        <h2 id="habits-title">&#128293; Habit Streaks</h2>
 
          <p>Build and track your daily habits.</p>
 
@@ -162,7 +169,7 @@
 
     <header class="card-header">
 
- <h2 id="calories-title">🏃 Active Calories</h2>
+ <h2 id="calories-title">&#127939; Active Calories</h2>
 
   <p>Calculate calories burned through activity.</p>
 
